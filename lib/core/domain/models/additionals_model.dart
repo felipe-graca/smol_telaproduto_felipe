@@ -1,19 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class AdditionalsModel {
+class AdditionalModel {
   final String name;
   final double price;
-  const AdditionalsModel({
+  const AdditionalModel({
     this.name = '',
     this.price = 0.0,
   });
 
-  AdditionalsModel copyWith({
+  AdditionalModel copyWith({
     String? name,
     double? price,
   }) {
-    return AdditionalsModel(
+    return AdditionalModel(
       name: name ?? this.name,
       price: price ?? this.price,
     );
@@ -26,8 +26,8 @@ class AdditionalsModel {
     };
   }
 
-  factory AdditionalsModel.fromMap(Map<String, dynamic> map) {
-    return AdditionalsModel(
+  factory AdditionalModel.fromMap(Map<String, dynamic> map) {
+    return AdditionalModel(
       name: map['name'] as String,
       price: map['price'] as double,
     );
@@ -35,14 +35,14 @@ class AdditionalsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AdditionalsModel.fromJson(String source) =>
-      AdditionalsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AdditionalModel.fromJson(String source) =>
+      AdditionalModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'AdditionalsModel(name: $name, price: $price)';
 
   @override
-  bool operator ==(covariant AdditionalsModel other) {
+  bool operator ==(covariant AdditionalModel other) {
     if (identical(this, other)) return true;
 
     return other.name == name && other.price == price;

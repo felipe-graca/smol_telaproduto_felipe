@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/product_model.dart';
+import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
 import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
 import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
 import 'package:smol_telaproduto_felipe/core/ui/typography.dart';
@@ -41,7 +42,8 @@ class ProductView extends StatelessWidget {
                           children: [
                             Text(product.name).regularMedium(),
                             const SizedBox(width: 20),
-                            Text(product.price.toString()).regularMedium(
+                            Text(AppUI.formatCurrencyPtBr(product.price))
+                                .regularMedium(
                               CustomColors.green2,
                             ),
                           ],
@@ -54,6 +56,7 @@ class ProductView extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         CustomIcon.heart,
+                        size: 19.99,
                         color: Color(0xFFFF0000),
                       ),
                     )

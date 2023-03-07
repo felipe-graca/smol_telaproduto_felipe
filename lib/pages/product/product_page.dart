@@ -8,14 +8,25 @@ import 'package:smol_telaproduto_felipe/pages/product/components/product_side_ba
 import 'package:smol_telaproduto_felipe/pages/product/components/product_view.dart';
 import 'package:smol_telaproduto_felipe/pages/product/product_cubit.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  final productCubit = GetIt.I.get<ProductCubit>();
+
+  @override
+  void initState() {
+    productCubit.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final widht = MediaQuery.of(context).size.width;
-
-    final productCubit = GetIt.I.get<ProductCubit>();
 
     return Scaffold(
       body: BlocBuilder<ProductCubit, ProductState>(
@@ -59,13 +70,18 @@ class ProductPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ProductView(product: state.product),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Additionals(additionals: state.additionals)
                 ],
               ),
-              const Align(
+              Align(
                 alignment: Alignment.bottomCenter,
-                child: ProductSideBar(),
+                child: ProductSideBar(
+                  finishProduct: state.finishProduct,
+                  incrementProduct: () => productCubit.incrementProduct(),
+                  decrementProduct: () => productCubit.decrementProduct(),
+                  submit: () => productCubit.submit(),
+                ),
               ),
             ],
           );

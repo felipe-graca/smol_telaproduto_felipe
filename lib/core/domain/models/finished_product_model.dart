@@ -9,19 +9,23 @@ import 'package:smol_telaproduto_felipe/core/domain/models/product_model.dart';
 
 class FinishProductModel {
   final ProductModel product;
-  final List<AdditionalsModel> additionals;
-  FinishProductModel({
-    required this.product,
-    required this.additionals,
+  final List<AdditionalModel> additionals;
+  final int amountProducts;
+  const FinishProductModel({
+    this.product = ProductModel.empty,
+    this.additionals = const <AdditionalModel>[],
+    this.amountProducts = 1,
   });
 
   FinishProductModel copyWith({
     ProductModel? product,
-    List<AdditionalsModel>? additionals,
+    List<AdditionalModel>? additionals,
+    int? amountProducts,
   }) {
     return FinishProductModel(
       product: product ?? this.product,
       additionals: additionals ?? this.additionals,
+      amountProducts: amountProducts ?? this.amountProducts,
     );
   }
 
@@ -29,17 +33,19 @@ class FinishProductModel {
     return <String, dynamic>{
       'product': product.toMap(),
       'additionals': additionals.map((x) => x.toMap()).toList(),
+      'amountProducts': amountProducts,
     };
   }
 
   factory FinishProductModel.fromMap(Map<String, dynamic> map) {
     return FinishProductModel(
       product: ProductModel.fromMap(map['product'] as Map<String, dynamic>),
-      additionals: List<AdditionalsModel>.from(
-        (map['additionals'] as List<int>).map<AdditionalsModel>(
-          (x) => AdditionalsModel.fromMap(x as Map<String, dynamic>),
+      additionals: List<AdditionalModel>.from(
+        (map['additionals'] as List<int>).map<AdditionalModel>(
+          (x) => AdditionalModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
+      amountProducts: map['amountProducts'] as int,
     );
   }
 
@@ -50,16 +56,32 @@ class FinishProductModel {
 
   @override
   String toString() =>
-      'FinishProductModel(product: $product, additionals: $additionals)';
+      'FinishProductModel(product: $product, additionals: $additionals, amountProducts: $amountProducts)';
 
   @override
   bool operator ==(covariant FinishProductModel other) {
     if (identical(this, other)) return true;
 
     return other.product == product &&
-        listEquals(other.additionals, additionals);
+        listEquals(other.additionals, additionals) &&
+        other.amountProducts == amountProducts;
   }
 
   @override
-  int get hashCode => product.hashCode ^ additionals.hashCode;
+  int get hashCode =>
+      product.hashCode ^ additionals.hashCode ^ amountProducts.hashCode;
+
+  static const empty = FinishProductModel();
+
+  bool get isEmpty => this == FinishProductModel.empty;
+
+  bool get isNotEmpty => this != FinishProductModel.empty;
+
+  double get finalPrice {
+    double additionalsPrice = 0.0;
+    for (var additional in additionals) {
+      additionalsPrice += additional.price;
+    }
+    return (product.price + additionalsPrice) * amountProducts;
+  }
 }

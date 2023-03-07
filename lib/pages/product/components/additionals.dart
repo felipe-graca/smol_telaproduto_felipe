@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/additionals_model.dart';
+import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
 import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
 import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
 import 'package:smol_telaproduto_felipe/core/ui/typography.dart';
+import 'package:smol_telaproduto_felipe/pages/product/product_cubit.dart';
 
 class Additionals extends StatelessWidget {
-  final List<AdditionalsModel> additionals;
+  final List<AdditionalModel> additionals;
   const Additionals({
     required this.additionals,
     super.key,
@@ -13,6 +17,7 @@ class Additionals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productCubit = GetIt.I.get<ProductCubit>();
     return Column(
       children: [
         Container(
@@ -26,18 +31,18 @@ class Additionals extends StatelessWidget {
                 const Text("Adicionais").regularMedium(CustomColors.green1),
                 Row(
                   children: [
-                    const Text("complete o seu pedido")
+                    const Text("escolha até 3 itens")
                         .regularMedium(CustomColors.green1),
                     const SizedBox(width: 5),
                     Container(
                       width: 59.87,
                       height: 15,
                       decoration: const BoxDecoration(
-                          color: CustomColors.green3,
+                          color: Color(0xFFFF4B4B),
                           borderRadius: BorderRadius.all(Radius.circular(3))),
                       child: Center(
-                        child:
-                            const Text('OPCIONAL').lightRegular(Colors.white),
+                        child: const Text('OBRIGATORIO')
+                            .lightRegular(Colors.white),
                       ),
                     )
                   ],
@@ -48,59 +53,162 @@ class Additionals extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: Stack(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: additionals.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 42,
-                    decoration: const BoxDecoration(
-                      color: CustomColors.green4,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(12),
-                      ),
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 1, left: .7),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(12),
+          child: BlocBuilder<ProductCubit, ProductState>(
+            bloc: productCubit,
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: additionals.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 42,
+                        decoration: const BoxDecoration(
+                          color: CustomColors.green4,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(additionals[index].name).regularMedium(),
-                            Row(
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 1, left: .7),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(12),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('+ R\$${additionals[index].price.toString()}')
-                                    .regularMedium(),
-                                const SizedBox(width: 30),
-                                const Icon(
-                                  CustomIcon.plusCircle,
-                                  size: 14,
-                                  color: CustomColors.green3,
-                                ),
+                                Text(additionals[index].name).regularMedium(),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 70,
+                                      child: Text(
+                                        state.finishProduct.additionals
+                                                .where(
+                                                  (element) =>
+                                                      element ==
+                                                      additionals[index],
+                                                )
+                                                .isEmpty
+                                            ? '+ ${AppUI.formatCurrencyPtBr(additionals[index].price)}'
+                                            : '+ ${AppUI.formatCurrencyPtBr(productCubit.getTotalAdditionalPrice(additionals[index]))}',
+                                        textAlign: TextAlign.start,
+                                      ).regularMedium(
+                                        state.finishProduct.additionals
+                                                .where((element) =>
+                                                    element ==
+                                                    additionals[index])
+                                                .isNotEmpty
+                                            ? CustomColors.green3
+                                            : null,
+                                      ),
+                                    ),
+                                    if (state.finishProduct.additionals
+                                        .where((element) =>
+                                            element == additionals[index])
+                                        .isEmpty)
+                                      const SizedBox(width: 75)
+                                    else
+                                      const SizedBox(width: 20),
+                                    if (state.finishProduct.additionals
+                                        .where((element) =>
+                                            element == additionals[index])
+                                        .isEmpty)
+                                      InkWell(
+                                        onTap: () => GetIt.I
+                                            .get<ProductCubit>()
+                                            .addAdditionals(
+                                              additionals[index],
+                                            ),
+                                        child: const Icon(
+                                          CustomIcon.plusCircle,
+                                          size: 14,
+                                          color: CustomColors.green3,
+                                        ),
+                                      )
+                                    else
+                                      Container(
+                                        width: 69,
+                                        height: 21.16,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                              color: CustomColors.green3,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                offset: Offset(0, 1),
+                                                blurRadius: 5,
+                                                color:
+                                                    Color.fromARGB(50, 0, 0, 0),
+                                              )
+                                            ]),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            InkWell(
+                                              onTap: () => productCubit
+                                                  .removeAdditionals(
+                                                additionals[index],
+                                              ),
+                                              child: const Icon(
+                                                CustomIcon.minusCircle,
+                                                size: 14,
+                                                color: CustomColors.green3,
+                                              ),
+                                            ),
+                                            Text(
+                                              state.finishProduct.additionals
+                                                  .where((element) =>
+                                                      element ==
+                                                      additionals[index])
+                                                  .length
+                                                  .toString(),
+                                            ).regularSemiBold(
+                                                CustomColors.green3),
+                                            InkWell(
+                                              onTap: () =>
+                                                  productCubit.addAdditionals(
+                                                additionals[index],
+                                              ),
+                                              child: const Icon(
+                                                CustomIcon.plusCircle,
+                                                size: 14,
+                                                color: CustomColors.green3,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              Container(
-                decoration: const BoxDecoration(color: CustomColors.green4),
-                width: 1,
-                height: (42 * 3) - 10,
-              ),
-            ],
+                      );
+                    },
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(color: CustomColors.green4),
+                    width: 1,
+                    height: (42 * 3) - 10,
+                  ),
+                ],
+              );
+            },
           ),
         )
       ],

@@ -3,7 +3,8 @@ part of 'product_cubit.dart';
 
 class ProductState extends Equatable {
   final ProductModel product;
-  final List<AdditionalsModel> additionals;
+  final List<AdditionalModel> additionals;
+  final FinishProductModel finishProduct;
 
   const ProductState({
     this.product = const ProductModel(
@@ -12,24 +13,32 @@ class ProductState extends Equatable {
       image: 'assets/images/bombom.png',
       price: 4.50,
     ),
-    this.additionals = const <AdditionalsModel>[
-      AdditionalsModel(name: 'Morango', price: 1.25),
-      AdditionalsModel(name: 'Granulado', price: 1.25),
-      AdditionalsModel(name: 'Ninho', price: 1.25),
+    this.additionals = const <AdditionalModel>[
+      AdditionalModel(name: 'Morango', price: 1.25),
+      AdditionalModel(name: 'Granulado', price: 1.25),
+      AdditionalModel(name: 'Ninho', price: 1.25),
     ],
+    this.finishProduct = FinishProductModel.empty,
   });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        product,
+        additionals,
+        finishProduct,
+      ];
 
   ProductState copyWith({
-    String? location,
     ProductModel? product,
-    List<AdditionalsModel>? additionals,
+    List<AdditionalModel>? additionals,
+    FinishProductModel? finishProduct,
   }) {
     return ProductState(
       product: product ?? this.product,
       additionals: additionals ?? this.additionals,
+      finishProduct: finishProduct ?? this.finishProduct,
     );
   }
+
+  bool get hasMoreThreeAddictionals => finishProduct.additionals.length > 3;
 }
