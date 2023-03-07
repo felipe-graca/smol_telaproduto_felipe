@@ -32,55 +32,70 @@ class _ProductPageState extends State<ProductPage> {
       body: BlocBuilder<ProductCubit, ProductState>(
         bloc: productCubit,
         builder: (context, state) {
-          return Stack(
+          return Column(
             children: [
-              ListView(
-                children: [
-                  SizedBox(
-                    height: 180,
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: SizedBox(
-                            width: widht,
-                            child: Image.asset(
-                              'assets/images/background_store.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        CustomSearchBar(
-                          onBack: () =>
-                              Navigator.of(context).pushNamed(AppRouter.splash),
-                        ),
-                        Positioned(
-                          top: 75,
-                          left: (widht / 2) - 50.5,
+              SafeArea(
+                child: SizedBox(
+                  height: 180,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          width: widht,
                           child: Image.asset(
-                            'assets/images/logo_store.png',
+                            'assets/images/background_store.png',
                             fit: BoxFit.cover,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      CustomSearchBar(
+                        onBack: () =>
+                            Navigator.of(context).pushNamed(AppRouter.splash),
+                      ),
+                      Positioned(
+                        top: 75,
+                        left: (widht / 2) - 50.5,
+                        child: Image.asset(
+                          'assets/images/logo_store.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ProductView(product: state.product),
-                  ),
-                  const SizedBox(height: 10),
-                  Additionals(additionals: state.additionals)
-                ],
+                ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ProductSideBar(
-                  finishProduct: state.finishProduct,
-                  incrementProduct: () => productCubit.incrementProduct(),
-                  decrementProduct: () => productCubit.decrementProduct(),
-                  submit: () => productCubit.submit(),
+              Expanded(
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 56),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: ProductView(product: state.product),
+                            ),
+                            const SizedBox(height: 10),
+                            Additionals(additionals: state.additionals),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ProductSideBar(
+                        finishProduct: state.finishProduct,
+                        incrementProduct: () => productCubit.incrementProduct(),
+                        decrementProduct: () => productCubit.decrementProduct(),
+                        submit: () => productCubit.submit(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

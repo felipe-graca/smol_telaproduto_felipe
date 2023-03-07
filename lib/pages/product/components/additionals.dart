@@ -60,6 +60,7 @@ class Additionals extends StatelessWidget {
                 children: [
                   ListView.builder(
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: additionals.length,
                     itemBuilder: (context, index) {
                       return Container(
