@@ -6,7 +6,12 @@ class ProductState extends Equatable {
   final List<AdditionalsModel> additionals;
 
   const ProductState({
-    this.product = ProductModel.empty,
+    this.product = const ProductModel(
+      name: 'Bombom 1',
+      description: 'Doce de chocolate',
+      image: 'assets/images/bombom.png',
+      price: 4.50,
+    ),
     this.additionals = const <AdditionalsModel>[
       AdditionalsModel(name: 'Morango', price: 1.25),
       AdditionalsModel(name: 'Granulado', price: 1.25),

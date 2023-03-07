@@ -15,7 +15,7 @@ class AppRouter {
         page = const SplashPage();
         break;
       case product:
-        page = const ProductPage();
+        page = ProductPage();
         break;
       default:
         page = Container();
