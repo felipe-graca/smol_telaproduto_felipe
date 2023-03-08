@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/product_model.dart';
 import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
-import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_colors.dart';
 import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
-import 'package:smol_telaproduto_felipe/core/ui/typography.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_typography.dart';
 
-class ProductView extends StatelessWidget {
+class ProductViewComponent extends StatelessWidget {
   final ProductModel product;
 
-  const ProductView({super.key, required this.product});
+  const ProductViewComponent({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

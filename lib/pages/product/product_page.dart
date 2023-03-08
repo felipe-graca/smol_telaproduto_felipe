@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smol_telaproduto_felipe/core/routes/app_router.dart';
 import 'package:smol_telaproduto_felipe/core/ui/components/custom_search_bar.dart.dart';
-import 'package:smol_telaproduto_felipe/pages/product/components/additionals.dart';
-import 'package:smol_telaproduto_felipe/pages/product/components/product_side_bar.dart';
-import 'package:smol_telaproduto_felipe/pages/product/components/product_view.dart';
+import 'package:smol_telaproduto_felipe/pages/product/components/additionals_component.dart';
+import 'package:smol_telaproduto_felipe/pages/product/components/product_side_bar_component.dart';
+import 'package:smol_telaproduto_felipe/pages/product/components/product_view_component.dart';
 import 'package:smol_telaproduto_felipe/pages/product/product_cubit.dart';
 
 class ProductPage extends StatefulWidget {
@@ -77,10 +77,12 @@ class _ProductPageState extends State<ProductPage> {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20),
-                              child: ProductView(product: state.product),
+                              child:
+                                  ProductViewComponent(product: state.product),
                             ),
                             const SizedBox(height: 10),
-                            Additionals(additionals: state.additionals),
+                            AdditionalsComponent(
+                                additionals: state.additionals),
                             const SizedBox(height: 20),
                           ],
                         ),
@@ -88,11 +90,11 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: ProductSideBar(
+                      child: ProductSideBarComponent(
                         finishProduct: state.finishProduct,
                         incrementProduct: () => productCubit.incrementProduct(),
                         decrementProduct: () => productCubit.decrementProduct(),
-                        submit: () => productCubit.submit(),
+                        validateProduct: () => productCubit.submit(),
                       ),
                     ),
                   ],

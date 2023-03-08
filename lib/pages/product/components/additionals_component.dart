@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/additionals_model.dart';
 import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
-import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_colors.dart';
 import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
-import 'package:smol_telaproduto_felipe/core/ui/typography.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_typography.dart';
 import 'package:smol_telaproduto_felipe/pages/product/product_cubit.dart';
 
-class Additionals extends StatelessWidget {
+class AdditionalsComponent extends StatelessWidget {
   final List<AdditionalModel> additionals;
-  const Additionals({
+  const AdditionalsComponent({
     required this.additionals,
     super.key,
   });

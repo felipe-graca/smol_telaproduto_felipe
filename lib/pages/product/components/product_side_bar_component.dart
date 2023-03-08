@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/finished_product_model.dart';
 import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
-import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_colors.dart';
 import 'package:smol_telaproduto_felipe/core/ui/components/custom_dialogs.dart';
 import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
-import 'package:smol_telaproduto_felipe/core/ui/typography.dart';
+import 'package:smol_telaproduto_felipe/core/ui/custom_typography.dart';
 
-class ProductSideBar extends StatelessWidget {
+class ProductSideBarComponent extends StatelessWidget {
   final FinishProductModel finishProduct;
   final Function() incrementProduct;
   final Function() decrementProduct;
-  final bool Function() submit;
+  final bool Function() validateProduct;
 
-  const ProductSideBar({
+  const ProductSideBarComponent({
     required this.finishProduct,
     required this.decrementProduct,
     required this.incrementProduct,
-    required this.submit,
+    required this.validateProduct,
     super.key,
   });
 
@@ -77,7 +77,7 @@ class ProductSideBar extends StatelessWidget {
                 ),
               ),
               onTap: () async {
-                if (submit()) {
+                if (validateProduct()) {
                   CustomDialog.additionalsSucesses(
                     context: context,
                   );
