@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smol_telaproduto_felipe/core/routes/app_router.dart';
-import 'package:smol_telaproduto_felipe/core/ui/components/custom_search_bar.dart.dart';
+import 'package:smol_telaproduto_felipe/ui/widgets/custom_search_bar.dart.dart';
 import 'package:smol_telaproduto_felipe/pages/product/components/additionals_component.dart';
 import 'package:smol_telaproduto_felipe/pages/product/components/product_side_bar_component.dart';
 import 'package:smol_telaproduto_felipe/pages/product/components/product_view_component.dart';
@@ -50,7 +50,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ),
                       CustomSearchBar(
-                        onBack: () =>
+                        onBackTap: () =>
                             Navigator.of(context).pushNamed(AppRouter.splash),
                       ),
                       Positioned(

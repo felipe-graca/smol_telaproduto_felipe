@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smol_telaproduto_felipe/core/domain/models/finished_product_model.dart';
 import 'package:smol_telaproduto_felipe/core/helpers/app_ui.dart';
-import 'package:smol_telaproduto_felipe/core/ui/custom_colors.dart';
-import 'package:smol_telaproduto_felipe/core/ui/components/custom_dialogs.dart';
-import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
-import 'package:smol_telaproduto_felipe/core/ui/custom_typography.dart';
+import 'package:smol_telaproduto_felipe/ui/styles/custom_colors.dart';
+import 'package:smol_telaproduto_felipe/ui/styles/custom_typography.dart';
+import 'package:smol_telaproduto_felipe/ui/widgets/custom_dialogs.dart';
+import 'package:smol_telaproduto_felipe/ui/icons/custom_icons.dart';
 
 class ProductSideBarComponent extends StatelessWidget {
   final FinishProductModel finishProduct;

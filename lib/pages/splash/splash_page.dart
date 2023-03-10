@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smol_telaproduto_felipe/core/routes/app_router.dart';
-import 'package:smol_telaproduto_felipe/core/ui/colors.dart';
+import 'package:smol_telaproduto_felipe/ui/styles/custom_colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

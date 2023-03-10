@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smol_telaproduto_felipe/core/ui/custom_colors.dart';
-import 'package:smol_telaproduto_felipe/core/ui/icons/custom_icons.dart';
-import 'package:smol_telaproduto_felipe/core/ui/custom_typography.dart';
+import 'package:smol_telaproduto_felipe/ui/icons/custom_icons.dart';
+import 'package:smol_telaproduto_felipe/ui/styles/custom_colors.dart';
+import 'package:smol_telaproduto_felipe/ui/styles/custom_typography.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  final Function()? onBack;
+  final Function()? onBackTap;
 
-  const CustomSearchBar({super.key, this.onBack});
+  const CustomSearchBar({super.key, this.onBackTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CustomSearchBar extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: onBack,
+                onPressed: onBackTap,
                 icon: const Icon(
                   size: 15,
                   CustomIcon.arrowBack,
