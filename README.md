@@ -6,8 +6,10 @@ Para execudar o projeto basta fazer um clone em sua maquina e executar os seguin
 flutter pub get
 ```
 
-e
+e logo após
 
 ```
 flutter run
 ```
+
+### Feedback de desenvolvimento
