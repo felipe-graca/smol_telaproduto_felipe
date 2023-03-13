@@ -14,7 +14,7 @@ flutter run
 
 ### Feedback de desenvolvimento
 
-• Não foi encontrada nenhuma dificuldade aparente durante todo o processo de desenvolvimento do projeto em questão.
+• Não foi encontrada nenhuma dificuldade aparente durante todo o processo de desenvolvimento do projeto em questão.</br>
 • Algumas dicas que, no caso, acredito que fariam muito sentido seriam em relação ao Figma. Acredito que o tempo de desenvolvimento poderia ser reduzido significativamente se fossem criados padrões para alguns parâmetros, como sombras, espaçamentos, tipografia, botões e outros elementos.
 
 ### Projeto desenvolvido em 6 horas
