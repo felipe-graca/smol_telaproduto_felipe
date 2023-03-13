@@ -1,6 +1,6 @@
 <h1 align="center"> Smol Tela de produto </h1>
 
-Para execudar o projeto basta fazer um clone em sua maquina e executar os seguintes comandos:
+Para executar o projeto, basta cloná-lo em sua máquina e executar os seguintes comandos:
 
 ```
 flutter pub get
@@ -13,3 +13,8 @@ flutter run
 ```
 
 ### Feedback de desenvolvimento
+
+• Não foi encontrada nenhuma dificuldade aparente durante todo o processo de desenvolvimento do projeto em questão.
+• Algumas dicas que, no caso, acredito que fariam muito sentido seriam em relação ao Figma. Acredito que o tempo de desenvolvimento poderia ser reduzido significativamente se fossem criados padrões para alguns parâmetros, como sombras, espaçamentos, tipografia, botões e outros elementos.
+
+### Projeto desenvolvido em 6 horas
